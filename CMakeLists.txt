@@ -42,5 +42,8 @@ project(${META_PROJECT_NAME} VERSION ${META_VERSION} LANGUAGES C CXX)
 #
 # Executables and Libraries
 #
+file(GLOB_RECURSE Sources  main.cpp source/*.cpp include/*h)
 
-add_executable(TexasHoldemApp main.cpp)
+add_executable(TexasHoldemApp ${Sources})
+
+
