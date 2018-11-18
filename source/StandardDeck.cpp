@@ -6,6 +6,10 @@ using namespace DataModels;
 StandardDeck::StandardDeck() {
 	
 	this->__build_deck();
+
+	// reseed random and shuffle
+	std::srand((unsigned) std::time(0));
+	this->shuffle();
 }
 
 StandardDeck::~StandardDeck() {
@@ -43,25 +47,12 @@ void StandardDeck::place_top_card(std::shared_ptr<PlayCard> card) {
 		return;
 	}
 
-	// TODO: Decide on a good exeption throwing metho for this
+	// TODO: Decide on a good exception throwing method for this
 }
 
-void StandardDeck::__build_deck() {
-	
-	// Create all cards and mark them into the owned cards vector
-	for (int suits = 0; suits < 4; ++suits) {
+void StandardDeck::shuffle() {
 
-		for (int ranks = 0; ranks < 14; ++ranks) {
-
-			PlayCard::RANK cards_rank = (PlayCard::RANK) ranks;
-			PlayCard::SUIT cards_suit = (PlayCard::SUIT) suits; 
-			std::shared_ptr<PlayCard> new_card = 
-				std::make_shared<PlayCard>(cards_suit, cards_rank);
-			this->__all_my_cards.push_back(new_card);
-		}
-	}
-
-	this->_cards = this->__all_my_cards;
+	std::random_shuffle(this->_cards.begin(), this->_cards.end());
 }
 
 bool StandardDeck::does_card_belong_to_me(std::shared_ptr<PlayCard> card) {
@@ -107,5 +98,23 @@ std::string StandardDeck::to_string() {
 	result += "]";
 
 	return result;
+}
+
+void StandardDeck::__build_deck() {
+	
+	// Create all cards and mark them into the owned cards vector
+	for (int suits = 0; suits < 4; ++suits) {
+
+		for (int ranks = 0; ranks < 13; ++ranks) {
+
+			PlayCard::RANK cards_rank = (PlayCard::RANK) ranks;
+			PlayCard::SUIT cards_suit = (PlayCard::SUIT) suits; 
+			std::shared_ptr<PlayCard> new_card = 
+				std::make_shared<PlayCard>(cards_suit, cards_rank);
+			this->__all_my_cards.push_back(new_card);
+		}
+	}
+
+	this->_cards = this->__all_my_cards;
 }
 

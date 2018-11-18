@@ -21,7 +21,9 @@ class BaseDeck {
 		virtual std::shared_ptr<PlayCard> take_top_card() = 0;
 
 		virtual void place_top_card(std::shared_ptr<PlayCard> card) = 0;
-	
+
+		virtual void shuffle() = 0;
+
 	protected:
 
 		std::vector<std::shared_ptr<PlayCard>> _cards;

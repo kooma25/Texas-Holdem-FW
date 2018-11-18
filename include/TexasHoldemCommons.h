@@ -1,10 +1,13 @@
 #ifndef TEXASHOLDEMCOMMONS_H
 #define TEXASHOLDEMCOMMONS_H
 
-// Commons from stdd
+// Commons from std
 #include<vector>
 #include<memory>
 #include<string>
+#include<algorithm>
+#include<cstdlib>
+#include<ctime>
 
 #endif
 

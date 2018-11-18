@@ -12,5 +12,7 @@ int main()
 	std::shared_ptr<PlayCard> some_card = deck.take_top_card();
 
 	std::cout << deck.to_string() << std::endl;
+	std::cout << "Size of deck " << deck.get_number_of_cards() << std::endl;
+
 	return 0;
 }

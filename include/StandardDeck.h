@@ -20,11 +20,10 @@ class StandardDeck: public BaseDeck {
 		~StandardDeck();
 
 		unsigned int get_number_of_cards();
-
 		std::shared_ptr<PlayCard> take_top_card();	
-		
 		void place_top_card(std::shared_ptr<PlayCard> card);
-		
+		void shuffle();
+
 		bool does_card_belong_to_me(std::shared_ptr<PlayCard> card);
 		bool do_i_have_this_card(std::shared_ptr<PlayCard> card);
 

@@ -33,7 +33,6 @@ class PlayCard {
 
 		enum class RANK {
 			Ace,
-			One,
 			Two,
 			Three,
 			Four,
@@ -48,9 +47,8 @@ class PlayCard {
 			King
 		};
 
-		std::string RANK_AS_STR[14] = {
+		std::string RANK_AS_STR[13] = {
 			"Ace",
-			"One",
 			"Two",
 			"Three",
 			"Four",
