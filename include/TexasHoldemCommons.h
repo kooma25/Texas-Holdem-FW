@@ -8,6 +8,7 @@
 #include<algorithm>
 #include<cstdlib>
 #include<ctime>
+#include<array>
 
 // std exceptions
 #include<stdexcept>
