@@ -9,5 +9,8 @@
 #include<cstdlib>
 #include<ctime>
 
+// std exceptions
+#include<stdexcept>
+
 #endif
 

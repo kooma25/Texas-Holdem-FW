@@ -32,7 +32,9 @@ std::shared_ptr<PlayCard> StandardDeck::take_top_card() {
 		return top_card;
 	}
 
-	// TODO: Decide on a good  IndeOutOfBoundsException throwing method
+	std::string errmsg = "StandardDeck::underflow_error: ";
+	errmsg += "Trying to take a card when the deck is empty!";
+	throw new std::underflow_error(errmsg);
 }
 
 void StandardDeck::place_top_card(std::shared_ptr<PlayCard> card) {
@@ -47,7 +49,9 @@ void StandardDeck::place_top_card(std::shared_ptr<PlayCard> card) {
 		return;
 	}
 
-	// TODO: Decide on a good exception throwing method for this
+	std::string errmsg = "StandardDeck::logic_error: ";
+	errmsg += "Trying to add a card that is not from this deck!";
+	throw new std::logic_error(errmsg);
 }
 
 void StandardDeck::shuffle() {
