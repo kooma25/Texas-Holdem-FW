@@ -1,11 +1,12 @@
 #include <iostream>
 
-#include "source/Deck.cpp"
+#include "include/StandardDeck.h"
+
+using namespace TexasHoldemApp::DataModels;
 
 int main()
 {
-	Deck deck;
-	int num = deck.get_numbet_of_cards();
-	std::cout << "Number of cards in Deck: " << num << std::endl;
+	StandardDeck deck;
+	std::cout << "Hello, World!" << std::endl;
 	return 0;
 }
