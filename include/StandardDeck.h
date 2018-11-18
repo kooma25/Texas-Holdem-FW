@@ -3,34 +3,38 @@
 /*
  * Author: Pietari Poutiainen <pietari.poutiainen@gmail.com>
  * Purpose: Provides a standardized 52 card deck for use in the Texas Holdem base game rules.
- * Last Modified By
+ * Last Modified: 18.11.2018 <Author>
 */
 
 #include "BaseDeck.h"
-#include "PlayCard.h"
-#include <vector>
+#include "../include/TexasHoldemCommons.h"
 
 namespace TexasHoldemApp {
 namespace DataModels {
 
-class StandardDeck {
+class StandardDeck: public BaseDeck {
 
 	public:
 
 		StandardDeck();
 		~StandardDeck();
 
-		unsigned get_number_of_cards();
+		unsigned int get_number_of_cards();
 
-		PlayCard take_top_card();	
+		std::shared_ptr<PlayCard> take_top_card();	
 		
-		void place_top_card(PlayCard card);
+		void place_top_card(std::shared_ptr<PlayCard> card);
+		
+		bool does_card_belong_to_me(std::shared_ptr<PlayCard> card);
+		bool do_i_have_this_card(std::shared_ptr<PlayCard> card);
+
+		std::string to_string();
 
 	private:
 
-		void initialize_deck();
+		void __build_deck();
 
-		std::vector<PlayCard> __cards;
+	std::vector<std::shared_ptr<PlayCard>> __all_my_cards;
 
 };
 

@@ -1,12 +1,11 @@
 #include "../include/StandardDeck.h"
-#include <vector>
 
 using namespace TexasHoldemApp;
 using namespace DataModels;
 
 StandardDeck::StandardDeck() {
 	
-	this->initialize_deck();
+	this->__build_deck();
 }
 
 StandardDeck::~StandardDeck() {
@@ -14,30 +13,99 @@ StandardDeck::~StandardDeck() {
 	return;
 }
 
-PlayCard StandardDeck::take_top_card() {
+unsigned StandardDeck::get_number_of_cards() {
 
-	if (this->__cards.size() > 0) {
+	return this->_cards.size();
+}
+
+std::shared_ptr<PlayCard> StandardDeck::take_top_card() {
+
+	if (this->_cards.size() > 0) {
 		
-		PlayCard top_card = this->__cards.back();
-
-		this->__cards.pop_back();
+		std::shared_ptr<PlayCard> top_card = this->_cards.back();
+		this->_cards.pop_back();
 
 		return top_card;
 	}
+
+	// TODO: Decide on a good  IndeOutOfBoundsException throwing method
 }
 
-void StandardDeck::place_top_card(PlayCard card) {
+void StandardDeck::place_top_card(std::shared_ptr<PlayCard> card) {
 
-	this->__cards.push_back(card);
+
+	bool card_belongs_to_me = this->does_card_belong_to_me(card);
+	bool i_have_this_card = this->do_i_have_this_card(card);
+
+	if (card_belongs_to_me && i_have_this_card) {
+
+		this->_cards.push_back(card);
+		return;
+	}
+
+	// TODO: Decide on a good exeption throwing metho for this
 }
 
-unsigned StandardDeck::get_number_of_cards() {
+void StandardDeck::__build_deck() {
+	
+	// Create all cards and mark them into the owned cards vector
+	for (int suits = 0; suits < 4; ++suits) {
 
-	return this->__cards.size();
+		for (int ranks = 0; ranks < 14; ++ranks) {
 
+			PlayCard::RANK cards_rank = (PlayCard::RANK) ranks;
+			PlayCard::SUIT cards_suit = (PlayCard::SUIT) suits; 
+			std::shared_ptr<PlayCard> new_card = 
+				std::make_shared<PlayCard>(cards_suit, cards_rank);
+			this->__all_my_cards.push_back(new_card);
+		}
+	}
+
+	this->_cards = this->__all_my_cards;
 }
 
-void StandardDeck::initialize_deck() {
-	return;
+bool StandardDeck::does_card_belong_to_me(std::shared_ptr<PlayCard> card) {
+	
+	std::vector<std::shared_ptr<PlayCard>>::iterator it;
+	bool card_belongs_to_me = false;
+
+	for(it = this->__all_my_cards.begin(); it != this->__all_my_cards.end(); ++ it) {
+		if (*it == card) {
+			card_belongs_to_me = true;
+			break;
+		}
+	}
+
+	return card_belongs_to_me;
+}
+
+bool StandardDeck::do_i_have_this_card(std::shared_ptr<PlayCard> card) {
+	
+	std::vector<std::shared_ptr<PlayCard>>::iterator it;
+	bool i_have_this_card = false;
+
+	for (it = this->_cards.begin(); it != this->_cards.end(); ++it) {
+		if (*it == card) {
+			i_have_this_card = true;
+			break;
+		}
+	}
+
+	return i_have_this_card;
+}
+
+std::string StandardDeck::to_string() {
+	
+	std::string result = "[ ";
+
+	std::vector<std::shared_ptr<PlayCard>>::iterator it;
+	
+	for (it = this->_cards.begin(); it != this->_cards.end(); ++it) {
+		result += (*it)->to_string() + ", ";
+	}
+
+	result += "]";
+
+	return result;
 }
 

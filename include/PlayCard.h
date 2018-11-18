@@ -5,8 +5,10 @@
  * Author: Pietari Poutiainen
  * Purpose: Provides a data model for the playing card in the Texas Holdem
  *			Application game.
- * Date: 11.17.2018
+ * Last modified: 11.18.2018 <Author>
 */
+
+#include "../include/TexasHoldemCommons.h"
 
 namespace TexasHoldemApp {
 namespace DataModels {
@@ -15,14 +17,21 @@ class PlayCard {
 
 	public:
 		
-		enum class Suit {
+		enum class SUIT {
 			Diamonds,
 			Hearts,
 			Clubs,
 			Spades
 		};
 
-		enum class Rank {
+		std::string SUIT_AS_STR[4] = {
+			"Diamonds",
+			"Hearts",
+			"Clubs",
+			"Spades"
+		}; 
+
+		enum class RANK {
 			Ace,
 			One,
 			Two,
@@ -39,16 +48,34 @@ class PlayCard {
 			King
 		};
 
-		PlayCard(Suit suit, Rank rank);
+		std::string RANK_AS_STR[14] = {
+			"Ace",
+			"One",
+			"Two",
+			"Three",
+			"Four",
+			"Five",
+			"Six",
+			"Seven",
+			"Eight",
+			"Nine",
+			"Ten",
+			"Jack",
+			"Queen",
+			"King"
+		};
+
+		PlayCard(SUIT suit, RANK rank);
 		~PlayCard();
 
-		Suit get_suit();
-		Rank get_rank();
+		SUIT get_suit();
+		RANK get_rank();
+		std::string to_string();
 	
 	private:
 
-		Suit __suit;
-		Rank __rank;
+		SUIT __suit;
+		RANK __rank;
 
 };
 

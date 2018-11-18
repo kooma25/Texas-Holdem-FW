@@ -1,12 +1,16 @@
 #include <iostream>
 
 #include "include/StandardDeck.h"
+#include "include/PlayCard.h"
+#include "include/TexasHoldemCommons.h"
 
 using namespace TexasHoldemApp::DataModels;
 
 int main()
 {
 	StandardDeck deck;
-	std::cout << "Hello, World!" << std::endl;
+	std::shared_ptr<PlayCard> some_card = deck.take_top_card();
+
+	std::cout << deck.to_string() << std::endl;
 	return 0;
 }
